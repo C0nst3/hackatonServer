@@ -1,0 +1,21 @@
+{
+  "name": "ng-view",
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap": "^3.2.0"
+
+  },
+  "devDependencies": {
+  },
+  "appPath": "app",
+  "moduleName": "ngViewApp",
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  }
+}

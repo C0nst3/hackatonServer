@@ -1,0 +1,17 @@
+{
+  "name": "csvreplacer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "replacer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+	"express": "~4.8.x",
+	"csv": "^1.1.1",
+	"mongoose": "~3.6.2",
+  "body-parser": "*"
+  }
+}
