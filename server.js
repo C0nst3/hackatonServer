@@ -40,7 +40,7 @@ function create10DigitRandomLetter() {
 }
 
 //questo faceva le query nel DB
-app.get('/api/todos', function(req, res) {				// get of all the methods
+/*app.get('/api/todos', function(req, res) {				// get of all the methods
 	if(req.param('tsme_psIdOfItems')==''){
 		Todo.find({}).sort({datetime: -1}).limit(10)
 			.exec(function(err, todos) {
@@ -61,16 +61,11 @@ app.get('/api/todos', function(req, res) {				// get of all the methods
 				}
 		});
 	}
-});
+});*/
 
 app.get('/api/store', function(req,res){
-	//in teoria nel res del body dovremmo andare a contenere il nome del file da storare
-	if(csvParser.parse('./tmp/csv/orig_materials.csv')){
-		res.json("OK");
-	}else{
-		res.json("KO|"+err);
-	}
-	//res.sendFile(path.join(__dirname + '/app/index.html'));		
+	//in teoria nel req del body dovremmo andare a contenere il nome del file da storare
+	csvParser.parse('./tmp/csv/orig_prove.csv','./tmp/csv/orig_materials.csv',res)
 });
 
 //Servo la pagina quando mi viene richiesta
