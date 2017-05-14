@@ -6,7 +6,8 @@ var fs = require('fs');
 
 //Parte del db
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/hackatondb');
+//mongoose.connect('mongodb://127.0.0.1:27017/hackatondb');
+mongoose.connect('mongodb:446c3bc0-0cc5-46cf-bab3-b902fe53565e-bluemix:dedba9abc7f867ad54be29f5e3116e762ab008fd671a59546e35b6c8266d64a3@446c3bc0-0cc5-46cf-bab3-b902fe53565e-bluemix.cloudant.com:443/hackatondb');
 /*var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
