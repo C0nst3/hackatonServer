@@ -74,8 +74,8 @@ app.get('*', function(req, res) {
 });
 
 //Mi metto in ascolto sulla porta 80
-app.listen(80, function() {
-	console.log('App listening on port 80');
+app.listen(3000, function() {
+	console.log('App listening on port 3000');
 });
 
 //non mi ricordo assolutamente cosa faccia ma mi sembra utile, se non erro mi 
