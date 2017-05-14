@@ -3,7 +3,7 @@ var materialCsvParser = require('./materialCsvParser');
 var proveCsvParser = require('./proveCsvParser');
 var parse = require('csv-parse');
 var fs = require('fs');
-
+/*
 //Parte del db
 var mongoose = require('mongoose');
 //mongoose.connect('mongodb://127.0.0.1:27017/hackatondb');
@@ -16,7 +16,7 @@ db.once('open', function() {
 });*/
 
 // definition of the model
-var prove = mongoose.model('prove',
+/*var prove = mongoose.model('prove',
 	{
 			IdMaterial:Number,
 			Usura_mat_mm:Number,
@@ -43,7 +43,7 @@ var Todo = mongoose.model('material', {
 });*/
 
 CsvParser.prototype.parse = function(proveCsvPath,materialCsvPath,res){
-	
+	/*
 	var arr_csvReaded=[], arr_jsonProveToStore=[], arr_jsonMaterialToStore=[];
 	fs.readFile(proveCsvPath, 'utf-8',function(err,data){
 		if (!err){
@@ -80,12 +80,12 @@ CsvParser.prototype.parse = function(proveCsvPath,materialCsvPath,res){
 																			});
 
 									*/
-								});
+		/*						});
 						}
 					});
 			});
 		}
-	});
+	});*/
 	
 	//return true;
 };
