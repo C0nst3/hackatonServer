@@ -3,7 +3,6 @@ var materialCsvParser = require('./materialCsvParser');
 var proveCsvParser = require('./proveCsvParser');
 var parse = require('csv-parse');
 var fs = require('fs');
-var Schema = mongoose.Schema;
 
 //Parte del db
 var mongoose = require('mongoose');
@@ -37,7 +36,7 @@ var Todo = mongoose.model('material', {
 	age : { type: Number, min: 4, max: 125 },
 	point:{type: Number, default: 0},
 	datetime: { type: Date, default: Date.now }
-});*/
+});
 
 CsvParser.prototype.parse = function(csvPath){
 	var arr_csvReaded=[], arr_jsonToStore=[];
@@ -84,7 +83,7 @@ CsvParser.prototype.parse = function(csvPath){
 	
 	//return true;
 };
-
+*/
 // export the class 
 module.exports = new CsvParser();
 
