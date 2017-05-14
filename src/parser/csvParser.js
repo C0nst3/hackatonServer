@@ -42,26 +42,46 @@ function initDBConnection() {
 initDBConnection();
 
 
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/hackatondb');
+//var mongoose = require('mongoose');
+//mongoose.connect('mongodb://127.0.0.1:27017/hackatondb');
+//
+//// definition of the model
+//var prove = mongoose.model('prove',
+//	{
+//			IdMaterial:Number,
+//			Usura_mat_mm:Number,
+//			Usura_mat_g:Number,
+//			Usura_disco_g:Number,
+//			Raggio:Number,
+//			Durezza:Number,
+//			List: [{
+//				Materia_prima: Number,
+//				Quantità: Number,
+//				Gruppo: Number
+//			}]
+//	}
+//);
 
-// definition of the model
-var prove = mongoose.model('prove',
-	{
-			IdMaterial:Number,
-			Usura_mat_mm:Number,
-			Usura_mat_g:Number,
-			Usura_disco_g:Number,
-			Raggio:Number,
-			Durezza:Number,
-			List: [{
-				Materia_prima: Number,
-				Quantità: Number,
-				Gruppo: Number
-			}]
-	}
-);
 
+// Per salvare un documento
+var saveDocument = function(id, name, value) {
+
+    if (id === undefined) {
+        // Generated random id
+        id = '';
+    }
+
+    db.insert({
+        name: name,
+        value: value
+    }, id, function(err, doc) {
+        if (err) {
+            console.log(err);
+        }   
+    });
+}
+
+saveDocument(null, 'Key', 'value');
 
 CsvParser.prototype.parse = function(proveCsvPath,materialCsvPath,res){
 	var arr_csvReaded=[], arr_jsonProveToStore=[], arr_jsonMaterialToStore=[];
