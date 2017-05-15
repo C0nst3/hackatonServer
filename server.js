@@ -11,16 +11,6 @@ app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-/*app.get('/api/saveImg', function(req, res) {				//save an image on the server
-	//var img=dataUriToBuffer(req.param('imageToConvert'));
-	var img=req.param('imageToConvert');
-	var data = img.replace(/^data:image\/\w+;base64,/, "");
-	var buffer = new Buffer(data, 'base64');
-	var filename=randomImgNameGenerator();
-	var filePath='tmp/divToShare/'+filename+'.png';
-	
-});*/
-
 //può tornare utile un generatore di numeri casuali random, per ora lo lascio qui
 function randomNameGenerator(sName){
 		var date = new Date();
@@ -39,8 +29,39 @@ function create10DigitRandomLetter() {
     return digit;
 }
 
+app.get('/api/store', function(req,res){
+	//in teoria nel req del body dovremmo andare a contenere il nome del file da storare
+	csvParser.parse('./tmp/csv/orig_prove.csv','./tmp/csv/orig_materials.csv',res)
+});
+
+//Servo la pagina quando mi viene richiesta
+app.get('*', function(req, res) {						
+	res.sendFile(path.join(__dirname + '/app/index.html'));				
+});
+
+//Mi metto in ascolto sulla porta 8080
+app.listen(8080, function() {
+	console.log('App listening on port 8080');
+});
+
+//non mi ricordo assolutamente cosa faccia ma mi sembra utile, se non erro mi 
+//restituisce la data corrente nel formato yyyymmddhh
+Date.prototype.yyyymmddhh = function() {
+  var mm = this.getMonth() + 1; // getMonth() is zero-based
+  var dd = this.getDate();
+  var hh = this.getTime();
+
+  return [this.getFullYear(),
+          (mm>9 ? '' : '0') + mm,
+          (dd>9 ? '' : '0') + dd,
+          (hh>9 ? '' : '0') + hh
+         ].join('');
+};
+
+
+
 //questo faceva le query nel DB
-app.get('/api/todos', function(req, res) {				// get of all the methods
+/*app.get('/api/todos', function(req, res) {				// get of all the methods
 	if(req.param('tsme_psIdOfItems')==''){
 		Todo.find({}).sort({datetime: -1}).limit(10)
 			.exec(function(err, todos) {
@@ -61,38 +82,14 @@ app.get('/api/todos', function(req, res) {				// get of all the methods
 				}
 		});
 	}
-});
+});*/
 
-app.get('/api/store', function(req,res){
-	//in teoria nel res del body dovremmo andare a contenere il nome del file da storare
-	if(csvParser.parse('./tmp/csv/orig_materials.csv')){
-		res.json("OK");
-	}else{
-		res.json("KO|"+err);
-	}
-	//res.sendFile(path.join(__dirname + '/app/index.html'));		
-});
-
-//Servo la pagina quando mi viene richiesta
-app.get('*', function(req, res) {						
-	res.sendFile(path.join(__dirname + '/app/index.html'));				
-});
-
-//Mi metto in ascolto sulla porta 80
-app.listen(80, function() {
-	console.log('App listening on port 80');
-});
-
-//non mi ricordo assolutamente cosa faccia ma mi sembra utile, se non erro mi 
-//restituisce la data corrente nel formato yyyymmddhh
-Date.prototype.yyyymmddhh = function() {
-  var mm = this.getMonth() + 1; // getMonth() is zero-based
-  var dd = this.getDate();
-  var hh = this.getTime();
-
-  return [this.getFullYear(),
-          (mm>9 ? '' : '0') + mm,
-          (dd>9 ? '' : '0') + dd,
-          (hh>9 ? '' : '0') + hh
-         ].join('');
-};
+/*app.get('/api/saveImg', function(req, res) {				//save an image on the server
+	//var img=dataUriToBuffer(req.param('imageToConvert'));
+	var img=req.param('imageToConvert');
+	var data = img.replace(/^data:image\/\w+;base64,/, "");
+	var buffer = new Buffer(data, 'base64');
+	var filename=randomImgNameGenerator();
+	var filePath='tmp/divToShare/'+filename+'.png';
+	
+});*/

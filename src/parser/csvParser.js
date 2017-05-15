@@ -3,109 +3,121 @@ var materialCsvParser = require('./materialCsvParser');
 var proveCsvParser = require('./proveCsvParser');
 var parse = require('csv-parse');
 var fs = require('fs');
+//Parte del db:
 
-//Parte del db
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/hackatondb');
+var cloudant = require('cloudant');
+var dbCredentials = {
+    dbName: 'indilium'
+};
+var db;
 
-// definition of the model
-var material = mongoose.model('material',{
-	Formula: Number,
-	List: [{
-		Materia_prima: Number,
-		Quantità: Number,
-		Gruppo: Number
-	}]
-})
+function initDBConnection() {
+    //When running on Bluemix, this variable will be set to a json object
+    //containing all the service credentials of all the bound services
+    if (process.env.VCAP_SERVICES) {
+        dbCredentials.url = getDBCredentialsUrl(process.env.VCAP_SERVICES);
+    } else { //When running locally, the VCAP_SERVICES will not be set
 
-var prove = mongoose.model('prove',{
-	Formula: Number,
-	List: [{
-			Material:Number,
-			Usura_mat_mm:Number,
-			Usura_mat_g:Number,
-			Usura_disco_g:Number,
-			Raggio:Number,
-			Durezza:Number
-		}]
-});
-/*
-var Todo = mongoose.model('material', {
-	text: String,
-	sex : Boolean,
-	age : { type: Number, min: 4, max: 125 },
-	point:{type: Number, default: 0},
-	datetime: { type: Date, default: Date.now }
-});
+        // When running this app locally you can get your Cloudant credentials
+        // from Bluemix (VCAP_SERVICES in "cf env" output or the Environment
+        // Variables section for an app in the Bluemix console dashboard).
+        // Once you have the credentials, paste them into a file called vcap-local.json.
+        // Alternately you could point to a local database here instead of a
+        // Bluemix service.
+        // url will be in this format: https://username:password@xxxxxxxxx-bluemix.cloudant.com
+        dbCredentials.url = getDBCredentialsUrl(fs.readFileSync("vcap-local.json", "utf-8"));
+    }
 
-CsvParser.prototype.parse = function(csvPath){
-	var arr_csvReaded=[], arr_jsonToStore=[];
-	fs.readFile(csvPath, 'utf-8',function(err,data){
+    cloudant = require('cloudant')(dbCredentials.url);
+
+    // check if DB exists if not create
+    cloudant.db.create(dbCredentials.dbName, function(err, res) {
+        if (err) {
+            console.log('Could not create new db: ' + dbCredentials.dbName + ', it might already exist.');
+        }
+    });
+
+    db = cloudant.use(dbCredentials.dbName);
+}
+initDBConnection();
+
+
+//var mongoose = require('mongoose');
+//mongoose.connect('mongodb://127.0.0.1:27017/hackatondb');
+//
+//// definition of the model
+//var prove = mongoose.model('prove',
+//	{
+//			IdMaterial:Number,
+//			Usura_mat_mm:Number,
+//			Usura_mat_g:Number,
+//			Usura_disco_g:Number,
+//			Raggio:Number,
+//			Durezza:Number,
+//			List: [{
+//				Materia_prima: Number,
+//				Quantità: Number,
+//				Gruppo: Number
+//			}]
+//	}
+//);
+
+
+// Per salvare un documento
+var saveDocument = function(id, name, value) {
+
+    if (id === undefined) {
+        // Generated random id
+        id = '';
+    }
+
+    db.insert({
+        name: name,
+        value: value
+    }, id, function(err, doc) {
+        if (err) {
+            console.log(err);
+        }   
+    });
+}
+
+saveDocument(null, 'Key', 'value');
+
+CsvParser.prototype.parse = function(proveCsvPath,materialCsvPath,res){
+	var arr_csvReaded=[], arr_jsonProveToStore=[], arr_jsonMaterialToStore=[];
+	fs.readFile(proveCsvPath, 'utf-8',function(err,data){
 		if (!err){
 			parse(data, {delimiter: ';'}, 
 				function(err, output){
-					var indexFinObj=0;
 					if(output[0][0]=='Material'){
-						arr_jsonToStore=proveCsvParser.parse(output);
-						arr_jsonToStore.forEach(function(data, i){
-							prove.save(function(err, data){
-								if(err){
-									return false;
-									//res.json("KO|"+err);
-								}else{
-									return true;
-									//res.json("OK");
-								}
-							});
-						});
-						
-					}else{
-						output.forEach(function(arrData,i){
-							arr_csvReaded[i]=arrData[0].split(',');
-						});
-						arr_jsonToStore=materialCsvParser.parse(arr_csvReaded);
-						material.save(function(err, data){
-							if(err){
-								return false;
-								//res.json("KO|"+err);
-							}else{
-								return true;
-								//res.json("OK");
-							}
-						});
+						arr_jsonProveToStore=proveCsvParser.parse(output);
 					}
-					//stora nel DB
-					console.log(arr_jsonToStore[0]);
-				}
-			);
+					fs.readFile(materialCsvPath, 'utf-8',function(err,data){
+						if (!err){
+							parse(data, {delimiter: ','}, 
+								function(err, output){
+									arr_jsonMaterialToStore=materialCsvParser.parse(output);
+									arr_jsonProveToStore.forEach(function(proveToStore, iProve){
+										arr_jsonProveToStore[iProve].List=arr_jsonMaterialToStore[proveToStore.IdMaterial];
+										
+									});
+									var tmpProva = new prove(arr_jsonMaterialToStore);
+										tmpProva.save(function(err, data){
+											if(err){
+												res.json("KO|"+err);
+											}else{
+												res.json("OK");
+											}
+									});
+								});
+						}
+					});
+			});
 		}
 	});
 	
 	//return true;
 };
-*/
+
 // export the class 
 module.exports = new CsvParser();
-
-
-
-/*
-HOW TO STORE IN THE DB
-
-//inserimento nel DB
-app.post('/api/todos', function(req, res) {
-	if(req.body.text && req.body.text.length<905 && req.body.sex && req.body.age){
-		var newSecret = new Todo();
-		newSecret.text=req.body.text;
-		newSecret.sex= req.body.sex;
-		newSecret.age= req.body.age;
-
-		newSecret.save(function(err, newSecret){
-			if(err){
-				res.json("KO|"+err);
-			}else{
-				res.json("OK");
-			}
-		});
-}});
-*/
