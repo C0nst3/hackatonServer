@@ -3,13 +3,32 @@ var materialCsvParser = require('./materialCsvParser');
 var proveCsvParser = require('./proveCsvParser');
 var parse = require('csv-parse');
 var fs = require('fs');
+<<<<<<< HEAD
 //Parte del db:
 
 /*var cloudant = require('cloudant');
+=======
+var cloudant = require('cloudant');
+var hat=require('hat');
+//Parte del db:
+>>>>>>> 79fb0ea65d85b451c16923a761b355b87b298deb
 var dbCredentials = {
     dbName: 'indilium'
 };
 var db;
+
+// funzione per leggere le credenziali di accesso del db
+function getDBCredentialsUrl(jsonData) {
+    var vcapServices = JSON.parse(jsonData);
+    // Pattern match to find the first instance of a Cloudant service in
+    // VCAP_SERVICES. If you know your service key, you can access the
+    // service credentials directly by using the vcapServices object.
+    for (var vcapService in vcapServices) {
+        if (vcapService.match(/cloudant/i)) {
+            return vcapServices[vcapService][0].credentials.url;
+        }
+    }
+}
 
 function initDBConnection() {
     //When running on Bluemix, this variable will be set to a json object
@@ -17,7 +36,6 @@ function initDBConnection() {
     if (process.env.VCAP_SERVICES) {
         dbCredentials.url = getDBCredentialsUrl(process.env.VCAP_SERVICES);
     } else { //When running locally, the VCAP_SERVICES will not be set
-
         // When running this app locally you can get your Cloudant credentials
         // from Bluemix (VCAP_SERVICES in "cf env" output or the Environment
         // Variables section for an app in the Bluemix console dashboard).
@@ -31,58 +49,33 @@ function initDBConnection() {
     cloudant = require('cloudant')(dbCredentials.url);
 
     // check if DB exists if not create
-    cloudant.db.create(dbCredentials.dbName, function(err, res) {
+    /*cloudant.db.create(dbCredentials.dbName, function(err, res) {
         if (err) {
             console.log('Could not create new db: ' + dbCredentials.dbName + ', it might already exist.');
         }
-    });
+    });*/
 
     db = cloudant.use(dbCredentials.dbName);
 }
 initDBConnection();
 
-
-//var mongoose = require('mongoose');
-//mongoose.connect('mongodb://127.0.0.1:27017/hackatondb');
-//
-//// definition of the model
-//var prove = mongoose.model('prove',
-//	{
-//			IdMaterial:Number,
-//			Usura_mat_mm:Number,
-//			Usura_mat_g:Number,
-//			Usura_disco_g:Number,
-//			Raggio:Number,
-//			Durezza:Number,
-//			List: [{
-//				Materia_prima: Number,
-//				Quantità: Number,
-//				Gruppo: Number
-//			}]
-//	}
-//);
-
-
 // Per salvare un documento
-var saveDocument = function(id, name, value) {
-
-    if (id === undefined) {
-        // Generated random id
-        id = '';
-    }
-
-    db.insert({
-        name: name,
-        value: value
-    }, id, function(err, doc) {
+var saveDocument = function(arrToSave,res) {
+    var id = hat();
+    db.insert({ListOfToSave:arrToSave}, id, function(err, doc) {
         if (err) {
-            console.log(err);
+        	res.json("KO|"+err+": "+doc);
+        }else{
+        	res.json("OK|"+id);
         }   
     });
 }
 
+<<<<<<< HEAD
 saveDocument(null, 'Key', 'value');*/
 
+=======
+>>>>>>> 79fb0ea65d85b451c16923a761b355b87b298deb
 CsvParser.prototype.parse = function(proveCsvPath,materialCsvPath,res){
 	var arr_csvReaded=[], arr_jsonProveToStore=[], arr_jsonMaterialToStore=[];
 	fs.readFile(proveCsvPath, 'utf-8',function(err,data){
@@ -101,6 +94,7 @@ CsvParser.prototype.parse = function(proveCsvPath,materialCsvPath,res){
 										arr_jsonProveToStore[iProve].List=arr_jsonMaterialToStore[proveToStore.IdMaterial];
 										
 									});
+<<<<<<< HEAD
 									/*var tmpProva = new prove(arr_jsonMaterialToStore);
 										tmpProva.save(function(err, data){
 											if(err){
@@ -109,6 +103,9 @@ CsvParser.prototype.parse = function(proveCsvPath,materialCsvPath,res){
 												res.json("OK");
 											}
 									});*/
+=======
+									saveDocument(arr_jsonProveToStore,res);
+>>>>>>> 79fb0ea65d85b451c16923a761b355b87b298deb
 								});
 						}
 					});
@@ -121,3 +118,26 @@ CsvParser.prototype.parse = function(proveCsvPath,materialCsvPath,res){
 
 // export the class 
 module.exports = new CsvParser();
+
+
+
+
+//var mongoose = require('mongoose');
+//mongoose.connect('mongodb://127.0.0.1:27017/hackatondb');
+//
+//// definition of the model
+//var prove = mongoose.model('prove',
+//  {
+//          IdMaterial:Number,
+//          Usura_mat_mm:Number,
+//          Usura_mat_g:Number,
+//          Usura_disco_g:Number,
+//          Raggio:Number,
+//          Durezza:Number,
+//          List: [{
+//              Materia_prima: Number,
+//              Quantità: Number,
+//              Gruppo: Number
+//          }]
+//  }
+//);
