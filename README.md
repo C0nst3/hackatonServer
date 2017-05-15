@@ -8,7 +8,10 @@
 -server.js è l'entry point che permette di avviare il progetto.
 
 ## Build & development ... per installare
-git clone https://github.com/C0nst3/hackatonServer.git
-bower install
-npm install
-node server.js
+-git clone https://github.com/C0nst3/hackatonServer.git
+
+-bower install
+
+-npm install
+
+-node server.js
