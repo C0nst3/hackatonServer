@@ -32,10 +32,11 @@ body {
 #input {
   background: rgb(10, 10, 10);
   padding: 25px;
-  margin: 150px 0;
+  margin: 50px 0;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
 }
+
 
 #input h1 {
   display: block;
@@ -73,6 +74,17 @@ fieldset {
 
 #input button {
   cursor: pointer;
+  width: 100%;
+  border: none;
+  background: rgb(0, 100, 150);
+  color: white;
+  margin: 0 0 5px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.fileUpload {
+	cursor: pointer;
   width: 100%;
   border: none;
   background: rgb(0, 100, 150);

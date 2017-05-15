@@ -26,6 +26,27 @@ app.factory("JarrupalatService", ["$rootScope", "$http",
               });
         };
 		
+		// uploadCSV - Funzione per far partire l'elaborazione della rete neurale
+        //@param {function} callback - funzione di callback da richiamare al termine dell'interrogazione al server
+        svc.uploadCSV = function (file, callback) {
+            $http({
+                method: "POST",
+				data: file,
+                url: svc.nodeApp + "/api/upload",
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+            }).
+              then(function (response)	{  
+			  //code e.g. OK		  
+				console.log(response);
+                  //successo
+
+                  callback(response);
+              }, function (response) {
+                  //fallimento
+                  console.log('Error: ' + response);
+              });
+        };
+		
         // beginTraining - Funzione per far partire l'elaborazione della rete neurale
         //@param {function} callback - funzione di callback da richiamare al termine dell'interrogazione al server
         svc.beginTraining = function (callback) {

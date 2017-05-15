@@ -23,31 +23,64 @@
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
-    
     <div class="container" ng-controller="inputController">
+	
         <div role="form" class ="form-inline" id="input">
             <h1>JARRUPALAT Application Prototype</h1>
             <h2>Designed and coded by Indilium</h2>
             <fieldset>
-                <textarea class="form-control" ng-model="txtFormula" placeholder="Insert formula here." tabindex="1"></textarea>
+                <textarea class="form-control" ng-model="txtFormula" placeholder="Formula materiale." tabindex="1"></textarea>
             </fieldset>
             <fieldset>
-                <textarea class="form-control" placeholder="Insert test data here." tabindex="2"></textarea>
+                <textarea class="form-control" ng-model="txtImpianto" placeholder="Configurazione impianto frenante." tabindex="2"></textarea>
             </fieldset>
-            <fieldset>
-                <button class="btn btn-default" ng-click="startTraining()">Start Training</button>
+			<fieldset>
+                <button class="btn btn-default" ng-click="loadParameters()">Parametri DEMO</button>
             </fieldset>
+                       
             <fieldset>
-                <button class="btn btn-default" ng-click="loadParameters()">Load Default Parameters</button>
-            </fieldset>
-            <fieldset>
-                <button class="btn btn-default" ng-click="inputFunction()">Get Results</button>
+                <button class="btn btn-default" ng-click="inputFunction()"><span>Get Results</span>
+				<span><div class="spinner-small" data-ng-show="uploading2">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div></span></button>
             </fieldset>
             <fieldset>
                 <label class="" ng-show="showResults">{{txtResults}}</label>
             </fieldset>
-        </form>
+			<br/>
+			<br/>
+			<fieldset>
+			
+		<div class="fileUpload btn btn-default">
+                <span>Carica CSV formule</span>
+                <input type="file" class="upload" id="attachmentInput" />
+            </div>
+            </fieldset>
+			<fieldset>
+			<div class="fileUpload btn btn-default">
+                <span>Carica CSV risutati</span>
+                <input type="file" class="upload" id="attachmentInput" />
+            </div>
+            </fieldset>
+			<fieldset>
+                <button class="btn btn-default" ng-click="startTraining()"><span>Start Training
+				</span>
+				<span><div class="spinner-small" data-ng-show="uploading1">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div></span>
+				</button>
+            </fieldset> 
+			</div>
     </div>
+	
 </body>
 
 </html>
