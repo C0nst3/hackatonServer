@@ -3,15 +3,9 @@ var materialCsvParser = require('./materialCsvParser');
 var proveCsvParser = require('./proveCsvParser');
 var parse = require('csv-parse');
 var fs = require('fs');
-<<<<<<< HEAD
-//Parte del db:
-
-/*var cloudant = require('cloudant');
-=======
 var cloudant = require('cloudant');
 var hat=require('hat');
 //Parte del db:
->>>>>>> 79fb0ea65d85b451c16923a761b355b87b298deb
 var dbCredentials = {
     dbName: 'indilium'
 };
@@ -64,56 +58,40 @@ var saveDocument = function(arrToSave,res) {
     var id = hat();
     db.insert({ListOfToSave:arrToSave}, id, function(err, doc) {
         if (err) {
-        	res.json("KO|"+err+": "+doc);
+            res.json("KO|"+err+": "+doc);
         }else{
-        	res.json("OK|"+id);
+            res.json("OK|"+id);
         }   
     });
 }
 
-<<<<<<< HEAD
-saveDocument(null, 'Key', 'value');*/
-
-=======
->>>>>>> 79fb0ea65d85b451c16923a761b355b87b298deb
 CsvParser.prototype.parse = function(proveCsvPath,materialCsvPath,res){
-	var arr_csvReaded=[], arr_jsonProveToStore=[], arr_jsonMaterialToStore=[];
-	fs.readFile(proveCsvPath, 'utf-8',function(err,data){
-		if (!err){
-			parse(data, {delimiter: ';'}, 
-				function(err, output){
-					if(output[0][0]=='Material'){
-						arr_jsonProveToStore=proveCsvParser.parse(output);
-					}
-					fs.readFile(materialCsvPath, 'utf-8',function(err,data){
-						if (!err){
-							parse(data, {delimiter: ','}, 
-								function(err, output){
-									arr_jsonMaterialToStore=materialCsvParser.parse(output);
-									arr_jsonProveToStore.forEach(function(proveToStore, iProve){
-										arr_jsonProveToStore[iProve].List=arr_jsonMaterialToStore[proveToStore.IdMaterial];
-										
-									});
-<<<<<<< HEAD
-									/*var tmpProva = new prove(arr_jsonMaterialToStore);
-										tmpProva.save(function(err, data){
-											if(err){
-												res.json("KO|"+err);
-											}else{
-												res.json("OK");
-											}
-									});*/
-=======
-									saveDocument(arr_jsonProveToStore,res);
->>>>>>> 79fb0ea65d85b451c16923a761b355b87b298deb
-								});
-						}
-					});
-			});
-		}
-	});
-	
-	//return true;
+    var arr_csvReaded=[], arr_jsonProveToStore=[], arr_jsonMaterialToStore=[];
+    fs.readFile(proveCsvPath, 'utf-8',function(err,data){
+        if (!err){
+            parse(data, {delimiter: ';'}, 
+                function(err, output){
+                    if(output[0][0]=='Material'){
+                        arr_jsonProveToStore=proveCsvParser.parse(output);
+                    }
+                    fs.readFile(materialCsvPath, 'utf-8',function(err,data){
+                        if (!err){
+                            parse(data, {delimiter: ','}, 
+                                function(err, output){
+                                    arr_jsonMaterialToStore=materialCsvParser.parse(output);
+                                    arr_jsonProveToStore.forEach(function(proveToStore, iProve){
+                                        arr_jsonProveToStore[iProve].List=arr_jsonMaterialToStore[proveToStore.IdMaterial];
+                                        
+                                    });
+                                    saveDocument(arr_jsonProveToStore,res);
+                                });
+                        }
+                    });
+            });
+        }
+    });
+    
+    //return true;
 };
 
 // export the class 
