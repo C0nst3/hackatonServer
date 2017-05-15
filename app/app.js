@@ -41,25 +41,29 @@ app.controller("inputController", ["$scope", "JarrupalatService",
 
 		$scope.startTraining = function() {
 
-			/*JarrupalatService.mergeCSV(function(res) {});*/
-			changeText();
+			JarrupalatService.mergeCSV(function(res) {
+				
+			});
+			
 
 		}
 
 		function changeText() {
 
-			index++;
+			/*$scope.showResults = true;
 
-			if(index >= strings.length) {
-				index = 0;
+			while(1) {
+
+				index++;
+
+				if(index >= strings.length) {
+					index = 0;
+				}
+
+				$scope.txtResults = strings[index];
 			}
 
-			$scope.txtResults = strings[index];
-
-			$scope.showResults = true;
-			console.log(res);
+			console.log(res);*/
 		}
-
-		setInterval(changeText,10);
 
 	}]);
