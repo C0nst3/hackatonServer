@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.6.4",
     "body-parser": "*",
     "cfenv": "1.0.x",
     "cloudant": "^1.7.1",
