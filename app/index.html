@@ -1,23 +1,52 @@
 <!doctype html>
-<html>
-  <head>
+<html ng-app="app">
+
+<head>
     <meta charset="utf-8">
-    <title>Hackaton</title>
+    <title>JARRUPALAT</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/js/bootstrap.min.js" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-  </head>
-  <body>
-    	<script src="bower_components/jquery/dist/jquery.js"></script>
-    	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-	<p>Hallo Hallo Malto!!! Now are all cazzi TUA!!!</p>
-    <!--<script src="scripts/scriptToLoad.js"></script>-->
-    </body>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="..\bower_components\bootstrap\dist\css\bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+    
+    <div class="container" ng-controller="inputController">
+        <div role="form" class ="form-inline" id="input">
+            <h1>JARRUPALAT Application Prototype</h1>
+            <h2>Designed and coded by Indilium</h2>
+            <fieldset>
+                <textarea class="form-control" ng-model="txtFormula" placeholder="Insert formula here." tabindex="1"></textarea>
+            </fieldset>
+            <fieldset>
+                <textarea class="form-control" placeholder="Insert test data here." tabindex="2"></textarea>
+            </fieldset>
+            <fieldset>
+                <button class="btn btn-default" ng-click="startTraining()">Start Training</button>
+            </fieldset>
+            <fieldset>
+                <button class="btn btn-default" ng-click="loadParameters()">Load Default Parameters</button>
+            </fieldset>
+            <fieldset>
+                <button class="btn btn-default" ng-click="inputFunction()">Get Results</button>
+            </fieldset>
+            <fieldset>
+                <label class="" ng-show="showResults">{{txtResults}}</label>
+            </fieldset>
+        </form>
+    </div>
+</body>
+
 </html>
