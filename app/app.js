@@ -7,15 +7,16 @@ app.controller("inputController", ["$scope", "JarrupalatService",
 		$scope.uploading2 = false;
 		$scope.txtResults = "";
 		$scope.showResults = false;
-		var strings = ["Training in progress", "Training in progress.", "Training in progress..", "Training in progress..."];
-		var index = 0;
+		$scope.learningtime = 0;
+
 
 		$scope.inputFunction = function() {
 			$scope.uploading2 = true;
-			if(!(typeof $scope.txtFormula === undefined)) {
+				
 				var arrToParse = $scope.txtFormula.split(',');
-
 				var dataToStore=new Object();
+				dataToStore["Raggio"] = $scope.txtImpianto.split(',')[0];
+				dataToStore["Durezza"] = $scope.txtImpianto.split(',')[1];
 				dataToStore["Formula"]=arrToParse[0];
 				dataToStore["List"]=[];
 				for(var j=1; j<arrToParse.length; j=j+3) {
@@ -26,12 +27,12 @@ app.controller("inputController", ["$scope", "JarrupalatService",
 					});
 				}
 
-				console.log(dataToStore);
-				$scope.txtResults = dataToStore;
-				$scope.showResults = true;
-				$scope.uploading2 = false;
-
-			}
+				JarrupalatService.sendTest(dataToStore, function(res){
+					
+					$scope.txtResults = "Tempo impiegato: "+ res.time+ " Accuratezza: "+ res.accuracy + " Usura stimata: "+res.prediction;
+					$scope.showResults = true;
+					$scope.uploading2 = false;				
+				});
 		}
 
 		$scope.loadParameters = function() {
@@ -44,29 +45,13 @@ app.controller("inputController", ["$scope", "JarrupalatService",
 
 		$scope.startTraining = function() {
 			$scope.uploading1 = true;
-			JarrupalatService.mergeCSV(function(res) {
-				$scope.uploading1 = true;
+			JarrupalatService.mergeCSV(function(res) {				
+				JarrupalatService.beginTraining(res, function(res2){
+					$scope.learningtime = res2;
+					$scope.uploading1 = false;
+				});
 			});
 			
 
 		}
-
-		function changeText() {
-
-			/*$scope.showResults = true;
-
-			while(1) {
-
-				index++;
-
-				if(index >= strings.length) {
-					index = 0;
-				}
-
-				$scope.txtResults = strings[index];
-			}
-
-			console.log(res);*/
-		}
-
 	}]);

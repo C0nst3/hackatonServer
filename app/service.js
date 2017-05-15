@@ -19,7 +19,7 @@ app.factory("JarrupalatService", ["$rootScope", "$http",
 				console.log(response);
                   //successo
 
-                  callback(response);
+                  callback(response.data.split('|')[1]);
               }, function (response) {
                   //fallimento
                   console.log('Error: ' + response);
@@ -49,21 +49,21 @@ app.factory("JarrupalatService", ["$rootScope", "$http",
 		
         // beginTraining - Funzione per far partire l'elaborazione della rete neurale
         //@param {function} callback - funzione di callback da richiamare al termine dell'interrogazione al server
-        svc.beginTraining = function (callback) {
+        svc.beginTraining = function (doc, callback) {
             $http({
                 method: "GET",
-                url: svc.pythonApp + "/api/train/[nome]", //[nome documento json di conve]
+                url: svc.pythonApp + "/api/train/"+doc, //[nome documento json di conve]
                 headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
             }).
               then(function (response){
 			  //code e.g. OK
 			  //prediction
-			  //time			  
+			  //time
 			  
 				console.log(response);
                   //successo
 
-                  callback(response);
+                  callback(response.time);
               }, function (response) {
                   //fallimento
                   console.log('Error: ' + response);
@@ -83,8 +83,7 @@ app.factory("JarrupalatService", ["$rootScope", "$http",
     Quantità: Number,
     Gruppo: Number
    }]
- }*/
-			
+ }*/		
             $http({
                 method: "POST",
                 url: svc.pythonApp + "/api/predict_one",
