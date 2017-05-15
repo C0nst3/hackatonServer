@@ -51,7 +51,7 @@ app.factory("JarrupalatService", ["$rootScope", "$http",
         //@param {function} callback - funzione di callback da richiamare al termine dell'interrogazione al server
         svc.beginTraining = function (doc, callback) {
             $http({
-                method: "GET",
+                method: "POST",
                 url: svc.pythonApp + "/api/train/"+doc, //[nome documento json di conve]
                 headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
             }).
