@@ -42,7 +42,7 @@ app.controller("inputController", ["$scope", "JarrupalatService",
 		$scope.startTraining = function() {
 
 			JarrupalatService.mergeCSV(function(res) {
-				
+
 			});
 			
 
