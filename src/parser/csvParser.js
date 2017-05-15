@@ -80,13 +80,11 @@ initDBConnection();
 // Per salvare un documento
 var saveDocument = function(arrToSave,res) {
 
-    if (id === undefined) {
-        // Generated random id
-        id = hat();
-    }
+	//console.log("array to save:"+arrToSave);
+    var id = hat();
     db.insert(arrToSave, id, function(err, doc) {
         if (err) {
-        	res.json("KO|"+err);
+        	res.json("KO|"+err+": "+doc);
         }else{
         	res.json("OK");
         }   
@@ -113,7 +111,7 @@ CsvParser.prototype.parse = function(proveCsvPath,materialCsvPath,res){
 										arr_jsonProveToStore[iProve].List=arr_jsonMaterialToStore[proveToStore.IdMaterial];
 										
 									});
-									saveDocument(arr_jsonMaterialToStore,res);
+									saveDocument(arr_jsonProveToStore,res);
 									/*var tmpProva = new prove(arr_jsonMaterialToStore);
 										tmpProva.save(function(err, data){
 											if(err){
