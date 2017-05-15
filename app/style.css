@@ -23,14 +23,16 @@ body {
 }
 
 .container {
-  max-width: 400px;
+  max-width: 1000px;
   width: 100%;
   margin: 0 auto;
   position: relative;
 }
 
 #input {
+
   background: rgb(10, 10, 10);
+  width: 1000px;
   padding: 25px;
   margin: 50px 0;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -74,7 +76,7 @@ fieldset {
 
 #input button {
   cursor: pointer;
-  width: 100%;
+  width: 35%;
   border: none;
   background: rgb(0, 100, 150);
   color: white;
@@ -95,7 +97,9 @@ fieldset {
 }
 
 #input button:hover {
-  background: rgb(0, 70, 120);
+  float: left;
+  background: "#FFFFFF";
+  background-color: "#FFFFFF";
   -webkit-transition: background 0.3s ease-in-out;
   -moz-transition: background 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;
@@ -108,6 +112,10 @@ label {
   margin: 0 0 5px;
   padding: 10px;
   font-size: 15px
+}
+
+form-inline {
+  float: left;
 }
 
 .spinner {
