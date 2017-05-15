@@ -8,7 +8,7 @@ app.controller("inputController", ["$scope", "JarrupalatService",
 		$scope.txtResults = "";
 		$scope.showResults = false;
 		$scope.learningtime = 0;
-
+		$scope.predictDemo = true;
 
 		$scope.inputFunction = function() {
 			$scope.uploading2 = true;
@@ -29,15 +29,16 @@ app.controller("inputController", ["$scope", "JarrupalatService",
 
 				JarrupalatService.sendTest(dataToStore, function(res){
 					
-					$scope.txtResults = "Tempo impiegato: "+ res.time+ " Accuratezza: "+ res.accuracy + " Usura stimata: "+res.prediction;
+					$scope.txtResults = " Usura stimata: "+res.prediction + " Accuratezza: "+ res.accuracy ;
 					$scope.showResults = true;
-					$scope.uploading2 = false;				
+					$scope.uploading2 = false;						
 				});
 		}
 
 		$scope.loadParameters = function() {
 			$scope.txtFormula = "8951,1745,1.74,65,6439,6.43,65,6511,6.51,65,13709,13.7,65,15015,15.01,65,15027,15.02,65,16781,16.78,65,16837,16.83,65,32322,32.32,65,32329,32.32,65,32336,32.33,66,32350,32.35,66";
 			$scope.txtImpianto = "308, 196"; //raggio, durezza
+			$scope.predictDemo = false;
 			/*$scope.txtResults = "Parameters loaded."
 			$scope.showResults = true;*/
 

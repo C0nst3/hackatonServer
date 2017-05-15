@@ -93,13 +93,12 @@ app.factory("JarrupalatService", ["$rootScope", "$http",
               then(function (response) {
 				console.log(response);
 				//code
-				//time
 				//prediction (usura)
 				//accuracy
 				
                   //successo
 
-                  callback(response);
+                  callback(response.data.response);
               }, function (response) {
                   //fallimento
                   console.log('Error: ' + response);

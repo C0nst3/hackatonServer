@@ -27,18 +27,22 @@
         <div role="form" class ="form-inline" id="input">
             <h1>VALA Prototype</h1>
             <h2>Designed and coded by Indilium</h2>
+			<br/>	
             <fieldset>
                 <textarea class="form-control" ng-model="txtFormula" placeholder="Formula materiale." tabindex="1"></textarea>
             </fieldset>
             <fieldset>
                 <textarea class="form-control" ng-model="txtImpianto" placeholder="Configurazione impianto frenante." tabindex="2"></textarea>
             </fieldset>
+			<div class="row">
+			<div class="col-md-2 col-md-offset-8">
 			<fieldset>
                 <button class="btn btn-default" id="btnDemoPar" ng-click="loadParameters()">Parametri DEMO</button>
-            </fieldset>
-                       
+            </fieldset>  
+</div>			
+<div class="col-md-2">			
             <fieldset>
-                <button class="btn btn-default" id="btnStartPar" ng-click="inputFunction()"><span>Get Results</span>
+                <button class="btn btn-default pull-right" id="btnStartPar" ng-click="inputFunction()" ng-disabled="predictDemo"><span>Get Results</span>
 				<span><div class="spinner-small" data-ng-show="uploading2">
                     <div class="rect1"></div>
                     <div class="rect2"></div>
@@ -47,11 +51,15 @@
                     <div class="rect5"></div>
                 </div></span></button>
             </fieldset>
+			</div>
+			</div>
             <fieldset>
                 <label class="lblRisultati" ng-show="showResults">{{txtResults}}</label>
             </fieldset>
 			<br/>
-			<br/>
+			
+			<div class="row">
+			<div class="col-md-6">
 			<fieldset>
 			
 		<div class="fileUpload btn btn-default">
@@ -59,12 +67,16 @@
                 <input type="file" class="upload" id="attachmentInput" />
             </div>
             </fieldset>
+			</div>			
+<div class="col-md-6">	
 			<fieldset>
 			<div class="fileUpload btn btn-default">
                 <span>Carica CSV risutati</span>
                 <input type="file" class="upload" id="attachmentInput" />
             </div>
             </fieldset>
+			</div>
+			</div>
 			<fieldset>
                 <button class="btn btn-default" ng-click="startTraining()"><span>Start Training
 				</span>
