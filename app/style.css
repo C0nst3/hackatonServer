@@ -92,7 +92,7 @@ fieldset {
 label {
   width: 100%;
   text-align: center;
-  background: white;
+  background: rgb(160, 160, 160);
   margin: 0 0 5px;
   padding: 10px;
   font-size: 15px
