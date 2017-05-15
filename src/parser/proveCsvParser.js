@@ -11,7 +11,7 @@ ProveCsvParser.prototype.parse = function(arrToParse){
 	var arr_jsonToStore=[];
 	arrToParse.forEach(function(data, i){
 		var data={
-			Material:data[0],
+			IdMaterial:data[0],
 			Usura_mat_mm:data[1],
 			Usura_mat_g:data[2],
 			Usura_disco_g:data[3],
