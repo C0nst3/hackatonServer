@@ -31,7 +31,7 @@ body {
 }
 
 #input {
-
+border-radius: 4px;
   background: #2A3132;
   width: 1000px;
   padding: 10px;
@@ -107,13 +107,18 @@ fieldset {
   transition: background-color 0.3s ease-in-out;
 }
 
+
 label {
-  width: 100%;
+  border-radius: 4px;
+  width: 90%;
   text-align: center;
-  background: white/*rgb(120, 120, 120)*/;
-  margin: 0 0 5px;
+  background: white;
+  margin: 0 0 0px;
   padding: 10px;
-  font-size: 15px
+  font-size: 15px;
+  margin: 10px 10px;
+  color:#333;
+  float: right;
 }
 
 form-inline {
@@ -221,3 +226,4 @@ form-inline {
   width: 40%;
   float: left;
 }
+
