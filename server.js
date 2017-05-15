@@ -32,7 +32,7 @@ function create10DigitRandomLetter() {
 }
 
 app.get('/api/store', function(req,res){
-	//in teoria nel req del body dovremmo andare a contenere il nome del file da storare
+	//i file chiamati nella funzione di parse al momento sono arcodati perchè gli unici due file che ci sono stati forniti sono questi.
 	csvParser.parse('./tmp/csv/orig_prove.csv','./tmp/csv/orig_materials.csv',res)
 });
 
