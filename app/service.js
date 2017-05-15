@@ -1,5 +1,5 @@
-app.factory("jarrupalatService", ["$http",
-    function ($http) {
+app.factory("JarrupalatService", ["$rootScope", "$http",
+    function ($rootscope, $http) {
         var svc = {};
 
         //svc.__SP_APPNAME = "/jarrupalat";
@@ -15,9 +15,7 @@ app.factory("jarrupalatService", ["$http",
                 url: svc.nodeApp + "/api/store",
                 headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
             }).
-              then(function (response)
-			  //code e.g. OK		  
-			  
+              then(function (response)			{  //code e.g. OK		  
 				console.log(response);
                   //successo
 
@@ -36,7 +34,7 @@ app.factory("jarrupalatService", ["$http",
                 url: svc.pythonApp + "/api/train/[nome]", //[nome documento json di conve]
                 headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
             }).
-              then(function (response)
+              then(function (response){
 			  //code e.g. OK
 			  //prediction
 			  //time			  
@@ -72,7 +70,7 @@ app.factory("jarrupalatService", ["$http",
 				data: testArray,
                 headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
             }).
-              then(function (response)
+              then(function (response) {
 				console.log(response);
 				//code
 				//time
@@ -87,3 +85,6 @@ app.factory("jarrupalatService", ["$http",
                   console.log('Error: ' + response);
               });
         };
+
+        return svc;
+      }]);

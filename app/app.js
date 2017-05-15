@@ -1,6 +1,8 @@
-var app = angular.module('app', []);
+var app = angular.module("Jarrupalat", []);
 
-app.controller("inputController", ["$scope", "jarrupalatService", function($scope, jarrupalatService) {
+
+app.controller("inputController", ["$scope", "JarrupalatService", 
+	function($scope, JarrupalatService) {
 
 	$scope.txtResults = "";
 	$scope.showResults = false;
@@ -36,7 +38,7 @@ app.controller("inputController", ["$scope", "jarrupalatService", function($scop
 	}
 
 	$scope.startTraining = function() {
-		jarrupalatService.mergeCSV(function(res) {
+		JarrupalatService.mergeCSV(function(res) {
 
 			$scope.txtResults = "Training complete."
 			$scope.showResults = true;

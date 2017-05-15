@@ -5,7 +5,7 @@ var parse = require('csv-parse');
 var fs = require('fs');
 //Parte del db:
 
-var cloudant = require('cloudant');
+/*var cloudant = require('cloudant');
 var dbCredentials = {
     dbName: 'indilium'
 };
@@ -81,7 +81,7 @@ var saveDocument = function(id, name, value) {
     });
 }
 
-saveDocument(null, 'Key', 'value');
+saveDocument(null, 'Key', 'value');*/
 
 CsvParser.prototype.parse = function(proveCsvPath,materialCsvPath,res){
 	var arr_csvReaded=[], arr_jsonProveToStore=[], arr_jsonMaterialToStore=[];
@@ -101,14 +101,14 @@ CsvParser.prototype.parse = function(proveCsvPath,materialCsvPath,res){
 										arr_jsonProveToStore[iProve].List=arr_jsonMaterialToStore[proveToStore.IdMaterial];
 										
 									});
-									var tmpProva = new prove(arr_jsonMaterialToStore);
+									/*var tmpProva = new prove(arr_jsonMaterialToStore);
 										tmpProva.save(function(err, data){
 											if(err){
 												res.json("KO|"+err);
 											}else{
 												res.json("OK");
 											}
-									});
+									});*/
 								});
 						}
 					});

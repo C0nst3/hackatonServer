@@ -18,8 +18,8 @@ body {
   font-size: 12px;
   line-height: 30px;
   color: rgb(0, 100, 150);
-  background: rgb(40, 40, 40);
-  background-image: url("Blue_Brain_34size.jpg");
+  background: rgb(120, 120, 120)
+  /*background-image: url("Blue_Brain_34size.jpg");*/
 }
 
 .container {
@@ -92,7 +92,7 @@ fieldset {
 label {
   width: 100%;
   text-align: center;
-  background: rgb(160, 160, 160);
+  background: rgb(120, 120, 120);
   margin: 0 0 5px;
   padding: 10px;
   font-size: 15px
