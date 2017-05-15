@@ -1,4 +1,8 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
+@mist: #90AFC5;
+@stone: #336B87;
+@shadow: #2A3132;
+@autumn: #763626; 
+
 * {
   margin: 0;
   padding: 0;
@@ -13,26 +17,25 @@
 }
 
 body {
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-size: 12px;
   line-height: 30px;
-  color: rgb(0, 100, 150);
-  background: rgb(120, 120, 120);
+  color: #FFFFFF;
+  background: #90AFC5;
   /*background-image: url("Blue_Brain_34size.jpg");*/
 }
 
 .container {
-  max-width: 400px;
+  max-width: 1000px;
   width: 100%;
   margin: 0 auto;
   position: relative;
 }
 
 #input {
-  background: rgb(10, 10, 10);
-  padding: 25px;
-  margin: 50px 0;
+border-radius: 4px;
+  background: #2A3132;
+  width: 1000px;
+  padding: 10px;
+  margin: 10px 0;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
 }
@@ -74,9 +77,9 @@ fieldset {
 
 #input button {
   cursor: pointer;
-  width: 100%;
+  width: 35%;
   border: none;
-  background: rgb(0, 100, 150);
+  background: #336B87;
   color: white;
   margin: 0 0 5px;
   padding: 10px;
@@ -87,7 +90,7 @@ fieldset {
 	cursor: pointer;
   width: 100%;
   border: none;
-  background: rgb(0, 100, 150);
+  background: #336B87;
   color: white;
   margin: 0 0 5px;
   padding: 10px;
@@ -95,19 +98,31 @@ fieldset {
 }
 
 #input button:hover {
-  background: rgb(0, 70, 120);
+  float: left;
+  color: #000000;
+  background: #FFFFFF;
+  background-color: #FFFFFF;
   -webkit-transition: background 0.3s ease-in-out;
   -moz-transition: background 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;
 }
 
+
 label {
-  width: 100%;
+  border-radius: 4px;
+  width: 90%;
   text-align: center;
-  background: white/*rgb(120, 120, 120)*/;
-  margin: 0 0 5px;
+  background: white;
+  margin: 0 0 0px;
   padding: 10px;
-  font-size: 15px
+  font-size: 15px;
+  margin: 10px 10px;
+  color:#333;
+  float: right;
+}
+
+form-inline {
+  float: left;
 }
 
 .spinner {
@@ -206,3 +221,9 @@ label {
         -webkit-transform: scaleY(1.0);
     }
 }
+
+.fileUpload{
+  width: 40%;
+  float: left;
+}
+
